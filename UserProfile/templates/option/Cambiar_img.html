@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block body %}
+<div class="container">
+
+  <form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="card row-cols-1 col-7 m-auto bg-dark-red">
+
+      {% if form.errors %}
+      {% for field, error in form.errors.items %}
+      <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <strong>{{ field }}</strong>{{ error }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+      {% endfor %}
+      {% endif %}
+
+      <div class="result-img"></div>
+      <img id="ProfileImage" class="card col-6 m-auto mt-3 mb-3" src="{{user.image.url}}" alt="">
+      <div class="card-body">
+        <div class='align-item-center'>
+          Imagen Actual:
+          <a href="{{user.image.url}}">
+            {{user.image.url}}
+          </a>
+        </div>
+        {{ form }}
+
+        <input class="form-control btn-dark-red mt-2 mb-2" type="submit" value="Cambiar">
+      </div>
+    </div>
+  </form>
+</div>
+<script src="{% static 'js/main.js' %}"></script>
+{% endblock body %}

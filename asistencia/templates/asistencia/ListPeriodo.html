@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load widget_tweaks %}
+
+
+{% block body %}
+<div class="">
+    <table class="table-1">
+        <thead>
+            <tr>
+                <th>Usuario</th>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>Cedula</th>
+                <th>Fecha</th>
+                <th>Hora de Entrada</th>
+                <th>Hora de Salida</th>
+            </tr>
+        </thead>
+
+
+        <tbody>
+            {% for c in lista %}
+            <tr>
+                <td>
+                    {{ c.id_User.username }}
+                </td>
+                <td>
+                    {{ c.id_User.nombre }}
+                </td>
+                <td>
+                    {{ c.id_User.apellido }}
+                </td>
+                <td>
+                    {{ c.id_User.NumIdent }}
+                </td>
+                <td>
+                    {{ c.id_fecha }}
+                </td>
+                <td>
+                    {{ c.hora_inicio|time:"h:i A" }}
+                </td>
+                <td>
+
+                    {% if c.hora_salida == None %}
+                    <a href="{% url 'UpdatetAsis' c.id %}">
+                        Actualizar
+                    </a>
+                    {% elif c.hora_salida %}
+                    {{ c.hora_salida|time:"h:i A" }}
+                    {% endif %}
+
+                </td>
+            </tr>
+            {% empty %}
+            <td colspan="7">
+                No hay registro
+            </td>
+            {% endfor %}
+        </tbody>
+
+
+    </table>
+</div>
+
+
+{% endblock body %}

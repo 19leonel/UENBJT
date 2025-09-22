@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load widget_tweaks %}
+
+{% block body %}
+
+<div class="FormPeriodo p-4 container">
+
+    <div class="card row-cols-1 col-5 bg-dark-red bg-blue Form-Periodo m-2">
+        <form action="." method="POST">
+            {% csrf_token %}
+            <div class="card-body bg-blue">
+                {% if form.errors %}
+                {% for field, error in form.errors.items %}
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <strong>{{ field }}</strong>{{ error }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+                {% endfor %}
+                {% endif %}
+                <hr>
+    
+                {% for i in form %}
+    
+                {{ i.label }}
+    
+                {{ i }}
+    
+                {% endfor %}
+                <hr>
+                <div class="container item-button-center">
+                    <button type="submit" class="btn btn-success">
+                        Guardar
+                    </button>
+                    <button class="btn btn-danger" onclick="history.back()">
+                        Cancelar</button>
+                </div>
+    
+            </div>
+    
+    
+    
+        </form>
+    </div>
+    
+    <div class="card row-cols-1 col-6 bg-dark-red bg-blue m-2">
+        <table class="table-1">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Periodo</th>
+                </tr>
+            </thead>
+    
+    
+            <tbody>
+                {% for i in ListPeriodo %}
+                <tr>
+                    <td>
+                        {{ i.id }}
+                    </td>
+                    <td>
+                        {{ i.periodos }}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+    
+    
+        </table>  </div>
+
+</div>
+
+{% endblock body %}
+
+{% block js %}
+
+{% endblock js %}

@@ -1,0 +1,94 @@
+{% load filters %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    @page {
+        size: A4 landscape; /* Cambia a tamaño A4 en orientación horizontal */
+        margin: 20mm; /* Establece márgenes para la página */
+    }
+
+    body {
+        font-family: Arial, sans-serif;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    th, td {
+        padding: 10px;
+        border: 1px solid black;
+        text-align: center;
+    }
+</style>
+
+<body>
+
+    <div class="">
+        <h2>📋 Reporte Mensual de Asistencia</h2>
+
+        {% if asistencias_agrupadas %}
+        <h4 class="mb-4 text-white">Periodo: <strong>{{ periodo_actual }}</strong> | Mes: <strong>{{ mes_actual }}</strong>
+        </h4>
+        <h3>Asistencias</h3>
+        {% for semana, registros in asistencias_agrupadas.items %}
+        <h5 class="mb-3 text-white">📅 Semana {{ semana }}</h5>
+        <table border="1" style="border-color: black; color: black;">
+            <tr>
+                <th>Fecha</th>
+                <th>Usuario</th>
+                <th>Cédula</th>
+                <th>Hora de Entrada</th>
+                <th>Hora de Salida</th>
+                <th>¿Asistió?</th>
+            </tr>
+                {% for a in registros %}
+                <tr>
+                    <td>{{ a.id_fecha.fecha }}</td>
+                    <td>{{ a.id_User.username }}</td>
+                    <td>
+                    {% if a.id_User.NumIdent %}
+                        {{ a.id_User.NumIdent }}
+                    {% else %}
+                        No registrada
+                    {% endif %}
+                    </td>
+                    <td>
+                        {% if a.hora_inicio and a.Asis%}
+                        {{ a.hora_inicio|time:"h:i A" }}
+                        {% else %}
+                        No registrada
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if a.hora_salida and a.Asis%}
+                        {{ a.hora_salida|time:"h:i A" }}
+                        {% else %}
+                        No registrada
+                        {% endif %}
+                    </td>
+                    <td>{% if a.Asis %}✔️{% else %}❌{% endif %}</td>
+                </tr>
+                {% endfor %}
+            </table>
+            {% endfor %}
+
+        <h3>Resumen</h3>
+        <ul>
+            <li>Total de registros: {{ resumen.total }}</li>
+            <li>Asistencias: {{ resumen.asistencias }}</li>
+            <li>Inasistencias: {{ resumen.inasistencias }}</li>
+        </ul>
+        {% endif %}
+    </div>
+
+</body>
+
+</html>

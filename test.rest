@@ -1,0 +1,53 @@
+POST http://localhost:8000/api/login HTTP/1.1
+content-type: application/json
+
+###
+
+
+POST http://localhost:8000/api/login HTTP/1.1
+content-type: application/json
+
+{
+    "username":"Magnum",
+    "password": "Magnum07."
+}
+
+###
+POST http://localhost:8000/api/asistencia/hoy HTTP/1.1
+content-type: application/json
+
+{
+    "id": 1
+}
+
+###
+GET http://localhost:8000/api/asistencia/mes HTTP/1.1
+content-type: application/json
+
+{
+    "id_periodo": 1,
+    "mes": 7,
+    "id_user": 1
+}
+
+###
+
+GET http://localhost:8000/api/asistencia/mes HTTP/1.1
+content-type: application/json
+
+
+###
+GET http://localhost:8000/api/asistencia/periodo HTTP/1.1
+content-type: application/json
+
+{
+    "id_user":1,
+    "id_periodo":1
+}
+
+###
+GET http://localhost:8000/api/asistencia/periodo HTTP/1.1
+content-type: application/json
+
+
+###

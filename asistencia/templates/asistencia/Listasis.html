@@ -1,0 +1,83 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load widget_tweaks %}
+{% load filters %}
+
+{% block body %}
+<div class="container mt-4">
+    <h2 class="mb-4 text-center text-white">📋 Listado de Asistencias del Día</h2>
+
+    <div class="table-responsive">
+        <table class="table table-bordered align-middle text-center">
+            <thead class="table-dark">
+                <tr>
+                    <th>Fecha</th>
+                    <th>Usuario</th>
+                    <th>Cédula</th>
+                    <th>Hora de Entrada</th>
+                    <th>Hora de Salida</th>
+                    <th>¿Asistió?</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for c in lista %}
+                {# Lógica de color por estado #}
+                {% if c.hora_inicio and c.hora_salida %}
+                {% comment %} Todo correcto {% endcomment %}
+                <tr class="{{ c.row_class }}">
+                    {% elif c.hora_inicio or c.hora_salida %}
+                    {% comment %} Faltó una de las dos horas {% endcomment %}
+                <tr class="{{ c.row_class }}">
+                    {% else %}
+                    {% comment %} No asistió {% endcomment %}
+                <tr class="{{ c.row_class }}">
+                    {% endif %}
+
+                <tr class="{{ row_class }}">
+                    <td class="text-white">{{ c.id_fecha.fecha|fecha_larga }}</td>
+                    <td class="text-white">{{ c.id_User.nombre }} {{ c.id_User.apellido }}</td>
+                    <td class="text-white">
+                        {% if c.id_User.NumIdent %}
+                        {{ c.id_User.NumIdent }}
+                        {% else %}
+                        No registrada
+                        {% endif %}
+                    </td>
+                    <td class="text-white">
+                        {% if c.hora_inicio %}
+                        {{ c.hora_inicio|time:"h:i A" }}
+                        {% else %}
+                        <span class="text-danger fw-semibold">No registrada</span>
+                        {% endif %}
+                    </td>
+                    <td class="text-white">
+                        {% if not c.hora_salida and c.Asis %}
+                        <a href="{% url 'UpdatetAsis' c.id_User.id c.id_fecha.id %}"
+                            class="btn btn-sm btn-outline-primary">
+                            Registrar salida
+                        </a>
+                        {% elif not c.Asis %}
+                        <span class="text-danger fw-semibold">No registrada</span>
+                        {% else %}
+                        {{ c.hora_salida|time:"h:i A" }}
+                        {% endif %}
+                    </td>
+                    <td class="text-white">{% if c.Asis %}✔️{% else %}❌{% endif %}</td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="7" class="text-center text-muted">
+                        No hay registros de asistencia para este día.
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        {% if lista %}
+        <a href="{% url 'ListAsisPDF' %}" class="btn btn-success"> Exportar a pdf</a>
+        {% endif %}
+
+    </div>
+</div>
+{% endblock body %}

@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block body %}
+  <div class="container">
+    <h2>Bienvenido {{ user.username }}</h2>
+    <div class="container row">
+      <div class="card row col-6 ml-20 bg-dark-red" >
+        <div class="card mt-4 align-items-md-center bg-dark">
+          <a class="card mb-3 mt-3 col-6 text-red perfil" href="{% url 'cambiar_img' user.id %}">
+            
+            
+            
+            {%if user.image.url == "" %}
+            <img class="" src="{{ MEDIA_URL }}/Usuario.jpg" alt="" />
+            {% else %}
+            <img class="" src="{{ user.image.url }}" alt="" />
+            {% endif %}
+            
+            
+            
+              
+          </a>
+        </div>
+        <div class="card-body">
+          <h4 class="card-title">
+          {% if user.is_staff %}
+            Administrador
+          {% endif %}
+            </h4>
+            <hr class="col-12 m-auto">
+          <p class="card-text">{{ user.nombre|upper }} {{ user.apellido|upper }}</p>
+          <p class="card-text">Email: {{ user.email }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

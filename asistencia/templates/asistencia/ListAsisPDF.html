@@ -1,0 +1,102 @@
+{% load static %}
+{% load filters %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reporte de {{ fecha }} </title>
+</head>
+<style>
+    @page {
+        size: A4 landscape;
+        /* Cambia a tamaño A4 en orientación horizontal */
+        margin: 20mm;
+        /* Establece márgenes para la página */
+    }
+
+    body {
+        font-family: Arial, sans-serif;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    th,
+    td {
+        padding: 10px;
+        border: 1px solid black;
+        text-align: center;
+    }
+</style>
+<body>
+    <div class="container mt-4">
+        <h2 class="mb-4 text-center">📋 Reporte de Asistencias del Día {{ fecha.fecha }}</h2>
+    
+        <div class="table-responsive">
+            <table border="1" style="border-color: black; color: black;" class="table table-bordered align-middle text-center">
+                <thead class="table-dark">
+                    <tr>
+                        <th>Fecha</th>
+                        <th>Usuario</th>
+                        <th>Cédula</th>
+                        <th>Hora de Entrada</th>
+                        <th>Hora de Salida</th>
+                        <th>¿Asistió?</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for c in lista %}
+                    {# Lógica de color por estado #}
+                    {% if c.hora_inicio and c.hora_salida %}
+                    {% comment %} Todo correcto {% endcomment %}
+                    <tr class="{{ c.row_class }}">
+                        {% elif c.hora_inicio or c.hora_salida %}
+                        {% comment %} Faltó una de las dos horas {% endcomment %}
+                    <tr class="{{ c.row_class }}">
+                        {% else %}
+                        {% comment %} No asistió {% endcomment %}
+                    <tr class="{{ c.row_class }}">
+                        {% endif %}
+    
+                    <tr class="{{ row_class }}">
+                        <td>{{ c.id_fecha.fecha|fecha_larga }}</td>
+                        <td>{{ c.id_User.nombre }} {{ c.id_User.apellido }}</td>
+                        <td>
+                            {% if c.id_User.NumIdent %}
+                            {{ c.id_User.NumIdent }}
+                            {% else %}
+                            No registrada
+                            {% endif %}
+                        </td>
+                        <td>
+                            {% if c.hora_inicio and c.Asis %}
+                            {{ c.hora_inicio|time:"h:i A" }}
+                            {% else %}
+                            <span class="text-danger fw-semibold">No registrada</span>
+                            {% endif %}
+                        </td>
+                        <td>
+                            {% if not c.hora_salida %}
+                            <span class="text-danger fw-semibold">No registrada</span>
+                            {% else %}
+                            {{ c.hora_salida|time:"h:i A" }}
+                            {% endif %}
+                        </td>
+                        <td>{% if c.Asis %}✔️{% else %}❌{% endif %}</td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="7" class="text-center text-muted">
+                            No hay registros de asistencia para este día.
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>

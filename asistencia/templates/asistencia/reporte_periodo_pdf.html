@@ -1,0 +1,101 @@
+{% load filters %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    @page {
+        size: A4 landscape;
+        /* Cambia a tamaño A4 en orientación horizontal */
+        margin: 20mm;
+        /* Establece márgenes para la página */
+    }
+
+    body {
+        font-family: Arial, sans-serif;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    th,
+    td {
+        padding: 10px;
+        border: 1px solid black;
+        text-align: center;
+    }
+</style>
+
+<body>
+
+    <div class="container py-4">
+        {% if asistencias_agrupadas %}
+        <h4 class="mb-4">Periodo: <strong>{{ periodo_actual }}</strong></h4>
+    
+        {% for semana, asistencias in asistencias_agrupadas.items %}
+        <div class="mb-5">
+            <h5 class="mb-3">📅 Semana {{ semana }}</h5>
+            <div class="table-responsive">
+                <table border="1" style="border-color: black; color: black;">
+                    <thead>
+                        <tr>
+                            <th>Fecha</th>
+                            <th>Usuario</th>
+                            <th>Hora de Entrada</th>
+                            <th>Hora de Salida</th>
+                            <th>¿Asistió?</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for a in asistencias %}
+                        <tr>
+                            <td class="">{{ a.id_fecha.fecha|fecha_larga }}</td>
+                            <td class="">{{ a.id_User.nombre }} {{ a.id_User.apellido }}</td>
+                            <td class="">
+                                {% if a.hora_inicio and a.Asis%}
+                                {{ a.hora_inicio|time:"h:i A" }}
+                                {% else %}
+                                <span class="text-danger">No registrada</span>
+                                {% endif %}
+                            </td>
+                            <td class="">
+                                {% if a.hora_salida and a.Asis%}
+                                {{ a.hora_salida|time:"h:i A" }}
+                                {% else %}
+                                <span class="text-danger">No registrada</span>
+                                {% endif %}
+                            </td>
+                            <td class="">
+                                {% if a.Asis %}
+                                <span class="text-success fw-bold">✔</span>
+                                {% else %}
+                                <span class="text-danger fw-bold">❌</span>
+                                {% endif %}
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        {% endfor %}
+    
+        <div class="alert alert-info">
+            <h5 class="fw-bold">Resumen del Período:</h5>
+            <ul class="mb-0">
+                <li>Total de registros: {{ resumen.total }}</li>
+                <li>Asistencias: {{ resumen.asistencias }}</li>
+                <li>Inasistencias: {{ resumen.inasistencias }}</li>
+            </ul>
+        </div>
+        {% endif %}
+    </div>
+</body>
+
+</html>

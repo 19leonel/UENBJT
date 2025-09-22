@@ -1,0 +1,94 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> {% block title %} {% endblock %} </title>
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet" crossorigin="anonymous">
+    <link href="{% static 'css/index.css' %}" rel="stylesheet" crossorigin="anonymous">
+    <script defer src="{% static 'js\lib\jquery.min.js' %}"></script>
+    <script defer src="{% static 'js\lib\jquery.js' %}"></script>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="#">Navbar</a>
+            <button class="navbar-toggler d-lg-none" type="button" data-bs-toggle="collapse"
+                data-bs-target="#collapsibleNavId" aria-controls="collapsibleNavId" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="collapsibleNavId">
+                <ul class="navbar-nav me-auto mt-2 mt-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'index' %}">Inicio</a>
+                    </li>
+                    {% if request.user.is_authenticated %}
+                    {% if user.is_staff %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="/admin/">Admin</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'ListAsis' %}">Ver</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'RegisterAsis' %}">Registrar</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'reporte_periodo_mes' %}">Mes</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'reporte_periodo' %}">Periodo</a>
+                    {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'ListAsis' %}">Ver</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'reporte_periodo_mes' %}">Mes</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'reporte_periodo' %}">Periodo</a>
+                    </li>
+                    {% endif %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+                    </li>
+                    {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'register' %}">Signup</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'login' %}">Login</a>
+                    </li>
+                    {% endif %}
+
+                </ul>
+                <form class="d-flex my-2 my-lg-0" style="display: none;">
+                    <input class="form-control me-sm-2" type="text" placeholder="Search" style="display: none;" />
+                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit" style="display: none;">
+                        Search
+                    </button>
+                </form>
+            </div>
+        </div>
+    </nav>
+    <div class="container pt-5 col-xs-8 col-sm-8 col-md-6 col-lg-4 col-xl-4">
+        {% block body %} {% endblock %}
+    </div>
+
+
+</body>
+
+<script src="{% static 'js\lib\bootstrap.min.js' %}"></script>
+<script src="{% static 'js\lib\popper.min.js' %}"></script>
+<script src="{% static 'js\lib\bootstrap.bundle.min.js' %}"></script>
+
+
+{% block js %}
+
+{% endblock js %}
+
+</html>

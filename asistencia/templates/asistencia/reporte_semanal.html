@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load widget_tweaks %}
+
+
+{% block body %}
+<div class="container mt-5">
+    <h1 class="text-center mb-4">Reporte Semanal de Asistencia</h1>
+
+    <form method="POST" class="mb-4">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="periodo">Seleccionar Período:</label>
+            <select name="periodo" id="periodo" class="form-control">
+                <option value="">-- Seleccione --</option>
+                {% for periodo in Periodos %}
+                <option value="{{ periodo.id }}" {% if periodo.id == periodo_actual.id %}selected{% endif %}>
+                    {{ periodo.nombre }} ({{ periodo.fecha_inicio }} - {{ periodo.fecha_fin }})
+                </option>
+                {% endfor %}
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Generar reporte semanal</button>
+    </form>
+
+    {% if resumen %}
+    <div class="alert alert-info">
+        <h4>Resumen del reporte semanal</h4>
+        <p><strong>Total de registros:</strong> {{ resumen.total }}</p>
+        <p><strong>Asistencias:</strong> {{ resumen.asistencias }}</p>
+        <p><strong>Inasistencias:</strong> {{ resumen.inasistencias }}</p>
+        <p><strong>Horas culminadas:</strong> {{ resumen.horas_culminadas }}</p>
+        <p><strong>Horas no culminadas:</strong> {{ resumen.horas_no_culminadas }}</p>
+    </div>
+    {% endif %}
+
+    {% if asistencias_agrupadas %}
+    <h3 class="text-center mb-4">Asistencias agrupadas por semana</h3>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Semana</th>
+                <th>Total de Asistencias</th>
+                <th>Total de Inasistencias</th>
+                <th>Horas Culminadas</th>
+                <th>Horas No Culminadas</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for semana, registros in asistencias_agrupadas.items %}
+            <tr>
+                <td>{{ semana }}</td>
+                <td>{{ asistencias_contadas[semana]['asistencias'] }}</td>
+                <td>{{ asistencias_contadas[semana]['inasistencias'] }}</td>
+                <td>{{ asistencias_contadas[semana]['horas_culminadas'] }}</td>
+                <td>{{ asistencias_contadas[semana]['horas_no_culminadas'] }}</td>
+            </tr>
+            {% endfor %}
+            <a href="{% url 'reporte_periodo_mes_pdf' %}?periodo={{ periodo_actual.id }}&mes={{ mes_actual }}"
+                class="btn btn-success">Exportar a PDF</a>
+        </tbody>
+    </table>
+    {% endif %}
+</div>
+{% endblock body %}
