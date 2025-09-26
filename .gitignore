@@ -5,3 +5,4 @@ migrations/
 *.pyc
 db.sqlite3
 perfil/
+.env
