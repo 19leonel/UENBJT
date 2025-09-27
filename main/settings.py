@@ -44,12 +44,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'UserProfile',
     #lib
     'widget_tweaks',
     'rest_framework',
     'rest_framework.authtoken',
     #app
-    'UserProfile',
     'asistencia',
     'api',
 
