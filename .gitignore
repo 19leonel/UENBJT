@@ -5,7 +5,7 @@ __pycache__/
 db.sqlite3
 perfil/
 *.env
-.idea
+.idea/
 test.rest
 env
 .env
