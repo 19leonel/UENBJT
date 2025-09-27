@@ -39,14 +39,12 @@ class UserCreateView(FormView):
 
     def dispatch(self, request, *args, **kwargs):
         print('desde dispatch \n\n')
+        print(self.dispatch)
         return super().dispatch(request, *args, **kwargs)
 
     def form_valid(self, form):
         usuario = form.save()
-        a=Theme()
-        a.theme='light'
-        a.id_user = usuario
-        a.save()
+        print(usuario)
         login(self.request, usuario)
         return super().form_valid(form)
 
