@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load widget_tweaks %}
+{% block title %}
+SignUp
+{% endblock %}
+{% block body %}
+<form action="" method="POST" enctype="multipart/form-data">
+  {% csrf_token %}
+  <input type="hidden" name="next" value="{{ next }}" />
+  <div class="card row-cols-1  m-auto bg-dark-red bg-blue form-register">
+    <div class="card-body bg-blue">
+
+
+      {% if form.errors %}
+      {% for field, error in form.errors.items %}
+      <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <strong>{{ field }}</strong>{{ error }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+      {% endfor %}
+      {% endif %}
+
+
+
+
+      {% for campo in form %}
+      {{ campo.label }}
+
+      {% if campo.name == 'nacionalidad' %}
+
+      {{ campo|add_class:'form-control select-dark' }}
+
+      {% else %}
+
+      {{ campo|add_class:'form-control' }}
+
+      {% endif %}
+
+      {% endfor %}
+      <hr>
+      <div class="item-button-center">
+        <button type="submit" class="btn btn-success">
+          Guardar
+        </button>
+        <button class="btn btn-danger" onclick="history.back()">
+          Cancelar</button>
+      </div>
+
+    </div>
+  </div>
+</form>
+{% endblock %}

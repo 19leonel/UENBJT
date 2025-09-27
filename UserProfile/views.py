@@ -33,7 +33,7 @@ class UserViews(LoginRequiredMixin, ListView):
 
 
 class UserCreateView(FormView):
-    template_name = "registration/Signup.html"
+    template_name = "registration/Signup1.html"
     form_class = form.UserCreationForm2
     success_url = reverse_lazy('index')
 
