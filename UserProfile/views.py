@@ -39,8 +39,6 @@ class UserCreateView(FormView):
 
     def dispatch(self, request, *args, **kwargs):
         print('desde dispatch \n\n')
-        if request.user.is_authenticated:
-            return redirect('index')
         return super().dispatch(request, *args, **kwargs)
 
     def form_valid(self, form):
