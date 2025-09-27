@@ -1,3 +1,6 @@
+#!/usr/bin/env bash
+#build.sh
+
 set -o errexit
 
 # Modify this line as needed for your package manager (pip, poetry, etc.)
