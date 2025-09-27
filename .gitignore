@@ -8,3 +8,5 @@ perfil/
 *.env
 .idea
 test.rest
+env
+.env
