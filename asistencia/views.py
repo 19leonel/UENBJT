@@ -165,9 +165,9 @@ def AsistenciasListView(request):
                     asistencia.row_class = "table-warning"
                 else:
                     asistencia.row_class = "table-danger"
-            return render(request, 'asistencia/ListAsis.html', {'lista': lista, 'asistencia': asistencia})
+            return render(request, 'asistencia/Listasis.html', {'lista': lista, 'asistencia': asistencia})
         else:
-            return render(request, 'asistencia/ListAsis.html', {'lista': lista,})
+            return render(request, 'asistencia/Listasis.html', {'lista': lista,})
     else:
         try:
             idfecha = Fecha.objects.get(fecha=fecha_actual())
@@ -176,7 +176,7 @@ def AsistenciasListView(request):
             # return 
         lista = assistance.objects.filter(
             id_fecha=idfecha, id_User=request.user)
-        return render(request, 'asistencia/ListAsis.html', {'lista': lista})
+        return render(request, 'asistencia/Listasis.html', {'lista': lista})
     
 
 def asistencia_list_pdf(request):
