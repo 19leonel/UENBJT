@@ -75,7 +75,7 @@ def SigNout(request):
 
 class UserUpdateView(LoginRequiredMixin, UpdateView):
     model = User
-    template_name = "option/cambiar_img.html"
+    template_name = "option/Cambiar_img.html"
     form_class = form.ImgUpdateForm
     success_url = reverse_lazy('index')
 
