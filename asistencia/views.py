@@ -31,6 +31,10 @@ def Actualizar_Hora_S(request, id_user, id_fecha):
     return redirect('ListAsis')
 
 
+def Eliminar_Periodo(request, id):
+    Periodo.objects.get(pk=id).delete()
+    return redirect('PeriodoForm')
+
 def HorarioCreateView(request):
     # listas = Horarios.objects.all()
     form = HorariosForm()
@@ -235,7 +239,8 @@ class PeriodoCreateView(LoginRequiredMixin, CreateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['ListPeriodo'] = Periodo.objects.all()
+        context['ListPeriodo'] = Periodo.objects.all().order_by('periodos')
+        context['total'] = Periodo.objects.all().count()
         return context
 
     def form_valid(self, form):

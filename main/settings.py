@@ -14,6 +14,7 @@ from urllib.parse import urlparse, parse_qsl
 from dotenv import load_dotenv
 from pathlib import Path
 import os
+from main.dbs import db, db1
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -23,7 +24,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get("SECRET_KEY", default='"django-insecure-^_8xn9p8&t2@i-qm%g5dg-f*b(az41n$#t!(gr4c9&9a!c3*8x"')
+SECRET_KEY = os.environ.get("SECRET_KEY", default="django-insecure-^_8xn9p8&t2@i-qm%g5dg-f*b(az41n$#t!(gr4c9&9a!c3*8x")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 # DEBUG = 'RENDER' not in os.environ
@@ -35,6 +36,8 @@ RENDER_EXTERNAL_HOSTNAME = os.environ.get('RENDER_EXTERNAL_HOSTNAME')
 
 # if RENDER_EXTERNAL_HOSTNAME:
 #     ALLOWED_HOSTS.append(RENDER_EXTERNAL_HOSTNAME)
+#    print(RENDER_EXTERNAL_HOSTNAME
+# +  )
 
 # Application definition
 
@@ -99,15 +102,7 @@ load_dotenv()
 tmpPostgres = urlparse(os.getenv("DATABASE_URL"))
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': tmpPostgres.path.replace('/', ''),
-        'USER': tmpPostgres.username,
-        'PASSWORD': tmpPostgres.password,
-        'HOST': tmpPostgres.hostname,
-        'PORT': 5432,
-        'OPTIONS': dict(parse_qsl(tmpPostgres.query)),
-    }
+    'default': db1(BASE_DIR)
 }
 
 
