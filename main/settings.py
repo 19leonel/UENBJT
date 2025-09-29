@@ -14,7 +14,7 @@ from urllib.parse import urlparse, parse_qsl
 from dotenv import load_dotenv
 from pathlib import Path
 import os
-from main.dbs import db, db1
+from main.dbs import dbPostgreSQL, db1
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -102,7 +102,7 @@ load_dotenv()
 tmpPostgres = urlparse(os.getenv("DATABASE_URL"))
 
 DATABASES = {
-    'default': db1(BASE_DIR)
+    'default': dbPostgreSQL()
 }
 
 

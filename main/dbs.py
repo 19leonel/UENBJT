@@ -8,7 +8,7 @@ load_dotenv()
 
 # Replace the DATABASES section of your settings.py with this
 tmpPostgres = urlparse(os.getenv("DATABASE_URL"))
-try:
+def dbPostgreSQL():
     db = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': tmpPostgres.path.replace('/', ''),
@@ -18,11 +18,8 @@ try:
         'PORT': 5432,
         'OPTIONS': dict(parse_qsl(tmpPostgres.query)),
     }
-except:
-    db={
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(os.path.dirname(__file__), 'db.sqlite3'),
-    }
+    return db
+
 def db1(dir):
     d = {
         'ENGINE': 'django.db.backends.sqlite3',
