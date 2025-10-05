@@ -213,7 +213,7 @@ def asistencia_list_pdf(request):
             id_fecha=idfecha, id_User=request.user)
         context = {
             'lista': lista,
-            'fecha': fecha,
+            'fecha': idfecha,
         }
         html_string = render_to_string('asistencia/ListAsisPDF.html', context)
         html = HTML(string=html_string)
@@ -221,7 +221,7 @@ def asistencia_list_pdf(request):
 
         # Retornar el PDF como respuesta HTTP
         response = HttpResponse(pdf, content_type='application/pdf')
-        response['Content-Disposition'] = f'inline; filename="reporte_fecha_{fecha.fecha}.pdf"'
+        response['Content-Disposition'] = f'inline; filename="reporte_fecha_{idfecha.fecha}.pdf"'
         return response
 
 

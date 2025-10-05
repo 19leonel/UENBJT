@@ -52,11 +52,18 @@
                     </td>
                     <td class="text-white">
                         {% if not c.hora_salida and c.Asis %}
-                        <a href="{% url 'UpdatetAsis' c.id_User.id c.id_fecha.id %}"
-                            class="btn btn-sm btn-outline-primary">
-                            Registrar salida
-                        </a>
-                        {% elif not c.Asis %}
+
+                            {% if request.user.is_staff %}
+                            <a href="{% url 'UpdatetAsis' c.id_User.id c.id_fecha.id %}"
+                                class="btn btn-sm btn-outline-primary">
+                                Registrar salida
+                            </a>
+                            {% else %}
+                            <span class="text-danger fw-semibold">No registrada</span>
+                            {% endif %}
+
+
+                        {% elif not c.Asis and not request.user.is_staff %}
                         <span class="text-danger fw-semibold">No registrada</span>
                         {% else %}
                         {{ c.hora_salida|time:"h:i A" }}

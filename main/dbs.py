@@ -20,7 +20,8 @@ def dbPostgreSQL():
     }
     return db
 
-def db1(dir):
+
+def dbsqlite3(dir):
     d = {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': os.path.join(dir, 'db.sqlite3'),
