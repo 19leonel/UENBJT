@@ -111,7 +111,12 @@
         </ul>
     </div>
     {% endif %}
-<a href="{% url 'reporte_periodo_mes_pdf' %}?periodo={{ periodo_actual.id }}&mes={{ mes_actual }}"
-    class="btn btn-success">Exportar a PDF</a>
+
+    {% if asistencias_agrupadas %}
+
+    <a href="{% url 'reporte_periodo_mes_pdf' %}?periodo={{ periodo_actual.id }}&mes={{ mes_actual }}"
+        class="btn btn-success">Exportar a PDF</a>
+    {% endif %}
 </div>
+
 {% endblock %}

@@ -86,6 +86,11 @@
         </ul>
     </div>
     {% endif %}
+    
+    {% if asistencias_agrupadas %}
+        
     <a href="{% url 'reporte_periodo_pdf' %}?periodo={{ periodo_actual.id }}" class="btn btn-success">Exportar a PDF</a>
+    {% endif %}
+        
 </div>
 {% endblock %}

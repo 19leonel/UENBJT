@@ -1,6 +1,7 @@
 from django import template
 register = template.Library()
 import locale
+from datetime import datetime
 
 
 @register.filter
@@ -8,7 +9,11 @@ def get_range(value, max_value):
     return range(value, max_value+1)
 
 
-register = template.Library()
+@register.filter
+def dia_habil():
+    hoy = datetime.today()
+    print(hoy.weekday())
+    return hoy.weekday() < 5
 
 # Diccionarios manuales
 DIAS = ['Lunes', 'Martes', 'Miércoles',
