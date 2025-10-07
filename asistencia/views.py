@@ -1,20 +1,16 @@
 from collections import defaultdict
-from .models import assistance, Periodo, Fecha
 from weasyprint import HTML
-from django.shortcuts import render, HttpResponse
-from .models import assistance
 from .utils.time import hora_actual, fecha_actual, AnoActual
-from django.shortcuts import redirect, render
-from django.views.generic import View, TemplateView, ListView, CreateView, UpdateView, DetailView
+from django.shortcuts import redirect, render, HttpResponse
+from django.views.generic import TemplateView, CreateView
 from django.urls import reverse_lazy
-from .form import RegisterAssistance, UpdateAssistance, PeriodoForm, FilterAsistencia, HorariosForm
+from .form import RegisterAssistance, PeriodoForm, HorariosForm
 from .models import assistance, Periodo, Fecha, Horarios
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
 from django.template.loader import render_to_string
 from UserProfile.models import User
-import calendar
-from datetime import datetime, time, timedelta
+from datetime import datetime, time
 # Create your views here.
 
 

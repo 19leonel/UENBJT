@@ -1,11 +1,12 @@
 {% load filters %}
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>U.E.N. Brinolfo Jaime Torres</title>
 </head>
 <style>
     @page {
@@ -33,7 +34,10 @@
 </style>
 
 <body>
-
+    <img src="{% static 'img/escudo.jpg' %}" width="50">
+    <div>
+        <h2>U.E.N. Brinolfo Jaime Torres</h2>
+    </div>
     <div class="container py-4">
         {% if asistencias_agrupadas %}
         <h4 class="mb-4">Periodo: <strong>{{ periodo_actual }}</strong></h4>

@@ -35,7 +35,7 @@ class UserViews(LoginRequiredMixin, ListView):
 class UserCreateView(FormView):
     template_name = "registration/Signup1.html"
     form_class = form.UserCreationForm2
-    success_url = reverse_lazy('index')
+    success_url = reverse_lazy('profile')
 
     def dispatch(self, request, *args, **kwargs):
         print('desde dispatch \n\n')

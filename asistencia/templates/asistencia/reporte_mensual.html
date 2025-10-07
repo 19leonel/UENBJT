@@ -1,11 +1,13 @@
 {% load filters %}
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link rel="icon" href="{% static 'img/escudo_32x32.ico' %}" type="image/x-icon">
+    <title>U.E.N Brinolfo Jaime Torres</title>
 </head>
 <style>
     @page {
@@ -30,7 +32,10 @@
 </style>
 
 <body>
-
+    <div>
+        <img src="{% static 'img/escudo.jpg' %}" width="50">
+        <h2>U.E.N. Brinolfo Jaime Torres</h2>
+    </div>
     <div class="">
         <h2>📋 Reporte Mensual de Asistencia</h2>
 

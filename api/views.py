@@ -74,9 +74,6 @@ def AsistenciaMesApiList(request):
         id_periodo = request.data['id_periodo']
         mes = request.data['mes']
         id_user = request.data['id_user']
-        print(id_periodo)
-        print(mes)
-        print(id_user)
         try:
             periodo = Periodo.objects.get(id=id_periodo)
         except Periodo.DoesNotExist:
