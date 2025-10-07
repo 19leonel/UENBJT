@@ -1,5 +1,5 @@
 from django.urls import reverse_lazy
-from django.views.generic import UpdateView, ListView, CreateView, FormView
+from django.views.generic import UpdateView, ListView, CreateView, FormView, TemplateView
 from django.contrib.auth.views import LoginView
 from django.shortcuts import render, redirect, HttpResponse
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -80,6 +80,8 @@ class UserUpdateView(LoginRequiredMixin, UpdateView):
     success_url = reverse_lazy('index')
 
 
-@login_required
-def index(request):
-    return redirect('index')
+
+
+class index(TemplateView):
+    template_name = "src/home.html"
+

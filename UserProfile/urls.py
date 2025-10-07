@@ -23,8 +23,8 @@ from django.contrib.auth.views import LoginView
 urlpatterns = [
     
     # INICIO
-    path('', views.index, name=""),
-    path('profile/', views.perfil, name="index"),
+    path('', views.index.as_view(), name="index"),
+    path('profile/', views.perfil, name="profile"),
     path('Task/', views.taskView, name="task"),
     path('user/', views.UserViews.as_view(), name="UserList"),
     

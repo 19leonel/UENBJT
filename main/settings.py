@@ -102,7 +102,7 @@ load_dotenv()
 tmpPostgres = urlparse(os.getenv("DATABASE_URL"))
 
 DATABASES = {
-    'default': dbPostgreSQL()
+    'default': dbsqlite3(BASE_DIR)
 }
 
 
@@ -157,7 +157,7 @@ MEDIA_URL='/media/'
 
 LOGIN_URL = 'login'
 LOGOUT_REDIRECT_URL="logout"
-LOGIN_REDIRECT_URL='index'
+LOGIN_REDIRECT_URL = 'profile'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
