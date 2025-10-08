@@ -73,12 +73,16 @@
                     {% endif %}
 
                 </ul>
-                <form class="d-flex my-2 my-lg-0" style="display: none;">
-                    <input class="form-control me-sm-2" type="text" placeholder="Search" style="display: none;" />
-                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit" style="display: none;">
-                        Search
-                    </button>
-                </form>
+                <div class="d-flex my-2 my-lg-0" >
+                    <ul class="navbar-nav me-auto mt-2 mt-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'creditos' %}">Creadores <i class="bi bi-people"></i></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'docs' %}">Ayuda <i class="bi bi-question-circle"></i></a>
+                        </li>
+                    </ul>
+                </div>
             </div>
         </div>
     </nav>

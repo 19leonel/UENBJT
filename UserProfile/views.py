@@ -5,13 +5,22 @@ from django.shortcuts import render, redirect, HttpResponse
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth import login, logout
 from django.conf import settings
+from django.http import HttpResponse as httpResponse
 from .models import *
 from django.contrib.auth.decorators import login_required
 from .import form
 from api.models import Theme
 
+import os
+
 # Create your views here.
 
+def docs(requets):
+    ruta_archivo=os.path.join(settings.BASE_DIR, 'UserProfile', 'documents', 'Manual de Usuario.pdf')
+    with open(ruta_archivo, 'rb') as archivo:
+        response = httpResponse(archivo.read(), content_type='application/pdf')
+        response['Content-Disposition']='inline; filename="Manual_de_Usuario.pdf"'
+        return response
 
 class LoginViews(LoginView):
     template_name = "registration/login.html"
@@ -85,3 +94,6 @@ class UserUpdateView(LoginRequiredMixin, UpdateView):
 class index(TemplateView):
     template_name = "src/home.html"
 
+
+class creadores(TemplateView):
+    template_name = "src/creadores.html"

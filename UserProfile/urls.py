@@ -24,6 +24,8 @@ urlpatterns = [
     
     # INICIO
     path('', views.index.as_view(), name="index"),
+    path('docs/', views.docs, name="docs"),
+    path('creadores/', views.creadores.as_view(), name="creditos"),
     path('profile/', views.perfil, name="profile"),
     path('Task/', views.taskView, name="task"),
     path('user/', views.UserViews.as_view(), name="UserList"),
