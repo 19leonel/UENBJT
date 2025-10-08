@@ -11,7 +11,7 @@
             
             
             
-            {%if user.image.url == "" %}
+            {%if user.image == "Usuario.jpg" %}
             <img class="" src="{% static 'img/Usuario.jpg' %}" alt="User.jpg" />
             {% else %}
             <img class="" src="{{ user.image.url }}" alt="User.jpg" />

@@ -18,7 +18,11 @@
       {% endif %}
 
       <div class="result-img"></div>
-      <img id="ProfileImage" class="card col-6 m-auto mt-3 mb-3" src="{{user.image.url}}" alt="">
+      {%if user.image == "Usuario.jpg" %}
+      <img id="ProfileImage" class="card col-6 m-auto mt-3 mb-3" src="{% static 'img/Usuario.jpg' %}" alt="User.jpg" />
+      {% else %}
+      <img id="ProfileImage" class="card col-6 m-auto mt-3 mb-3" src="{{ user.image.url }}" alt="User.jpg" />
+      {% endif %}
       <div class="card-body">
         <div class='align-item-center'>
           Imagen Actual:
