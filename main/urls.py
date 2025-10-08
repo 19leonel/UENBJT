@@ -19,6 +19,10 @@ from django.urls import path, include, re_path
 from .import settings
 from api import views
 
+admin.site.site_header = "Administración de Usuarios"
+admin.site.site_title = "Panel de Administración"
+admin.site.index_title = "Bienvenido al Panel de Administración"
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('UserProfile.urls')),
