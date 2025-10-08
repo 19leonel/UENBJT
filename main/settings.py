@@ -101,7 +101,7 @@ load_dotenv()
 tmpPostgres = urlparse(os.getenv("DATABASE_URL"))
 
 DATABASES = {
-    'default': dbsqlite3(BASE_DIR)
+    'default': dbPostgreSQL()
 }
 
 
