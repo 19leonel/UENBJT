@@ -10,7 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
-from urllib.parse import urlparse, parse_qsl
+from urllib.parse import urlparse
 from dotenv import load_dotenv
 from pathlib import Path
 import os
@@ -101,7 +101,7 @@ load_dotenv()
 tmpPostgres = urlparse(os.getenv("DATABASE_URL"))
 
 DATABASES = {
-    'default': dbPostgreSQL()
+    'default': dbsqlite3(BASE_DIR)
 }
 
 

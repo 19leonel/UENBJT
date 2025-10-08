@@ -12,7 +12,7 @@
             
             
             {%if user.image.url == "" %}
-            <img class="" src="{{ MEDIA_URL }}/Usuario.jpg" alt="User.jpg" />
+            <img class="" src="{% static 'img/Usuario.jpg' %}" alt="User.jpg" />
             {% else %}
             <img class="" src="{{ user.image.url }}" alt="User.jpg" />
             {% endif %}

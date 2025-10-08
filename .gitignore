@@ -8,5 +8,6 @@ db.sqlite3
 test.rest
 perfil/
 .idea/
+.idea
 env
 .env

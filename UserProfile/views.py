@@ -86,7 +86,7 @@ class UserUpdateView(LoginRequiredMixin, UpdateView):
     model = User
     template_name = "option/Cambiar_img.html"
     form_class = form.ImgUpdateForm
-    success_url = reverse_lazy('index')
+    success_url = reverse_lazy('profile')
 
 
 
