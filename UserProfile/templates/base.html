@@ -11,6 +11,8 @@
     <link href="{% static 'css/index.css' %}" rel="stylesheet" crossorigin="anonymous">
     <link rel="icon" href="{% static 'img/escudo_32x32.ico' %}" type="image/x-icon">
     <link rel="stylesheet" href="{% static '/icons-1.11.3/font/bootstrap-icons.min.css' %}">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5349538897672616"
+    crossorigin="anonymous"></script>
     <script defer src="{% static 'js\lib\jquery.min.js' %}"></script>
     <script defer src="{% static 'js\lib\jquery.js' %}"></script>
 </head>
@@ -31,9 +33,9 @@
                         <a class="nav-link" href="{% url 'profile' %}">Perfil <i class="bi bi-person-fill"></i></a>
                     </li>
                     {% if user.is_staff %}
-                    <li class="nav-item">
+                    <!-- <li class="nav-item">
                         <a class="nav-link" href="/admin/">Admin <i class="bi bi-lock-fill"></i></a>
-                    </li>
+                    </li> -->
                     
                     
                     <li class="nav-item">
